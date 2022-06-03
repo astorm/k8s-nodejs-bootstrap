@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: elasticapm-test-service
+spec:
+  containers:
+  - name: elasticapm-node-web-app
+    image: elasticapm/node-web-app:0.0.1
+    ports:
+    - containerPort: 8080

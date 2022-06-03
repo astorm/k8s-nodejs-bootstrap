@@ -1,0 +1,31 @@
+# apiVersion: v1
+# kind: Pod
+# metadata:
+#   name: elasticapm-test-service
+# spec:
+#   containers:
+#   - name: elasticapm-node-web-app
+#     image: elasticapm/node-web-app:0.0.1
+#     ports:
+#     - containerPort: 8080
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: elasticapm-test-deployment
+  labels:
+    app: elasticapm
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: elasticapm
+  template:
+    metadata:
+      labels:
+        app: elasticapm
+    spec:
+      containers:
+      - name: elasticapm-whatisthis-1
+        image: elasticapm/node-web-app:0.0.1
+        ports:
+        - containerPort: 8080
