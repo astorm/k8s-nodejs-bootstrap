@@ -15,7 +15,7 @@ metadata:
   labels:
     app: elasticapm
 spec:
-  replicas: 3
+  replicas: 4
   selector:
     matchLabels:
       app: elasticapm
@@ -23,6 +23,8 @@ spec:
     metadata:
       labels:
         app: elasticapm
+      annotations:
+        co.elastic.traces/agent: nodejs
     spec:
       containers:
       - name: elasticapm-whatisthis-1

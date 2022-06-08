@@ -16,7 +16,7 @@ depcheck() {
   ## a version comes preinstalled with docker, but it's an older version
   ## which may cause isses with pre/post 1.24 feature.
   ## Install: https://kubernetes.io/docs/tasks/tools/#kubectl
-  kubectl version > /dev/null
+  kubectl version --client > /dev/null
 
   # Node and NPM usually come bundled together
   # node version manager: https://github.com/nvm-sh/nvm
@@ -28,7 +28,7 @@ depcheck() {
 install() {
   # create the cluster with an exposed port
   # for the NodePort
-  kind create cluster --config kubectl/cluster-nodeport.yaml --name elastic
+  kind create cluster --config kind-config/cluster-nodeport.yaml --name elastic
 
   # add the dashboard to our cluster
   kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.5.0/aio/deploy/recommended.yaml
@@ -88,8 +88,7 @@ postinstall() {
   echo '+--------------------------------------------------+'
 }
 
-if [ $1 == "postinstall" ]
-then
+if [ "$1" = "postinstall" ]; then
   postinstall
   exit 0
 fi
